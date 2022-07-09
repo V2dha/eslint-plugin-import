@@ -167,6 +167,11 @@ module.exports = {
       } else if (nextNode && nextNode.type !== 'ImportDeclaration' && (nextNode.type !== 'TSImportEqualsDeclaration' || nextNode.isExport)) {
         checkForNewLine(node, nextNode, 'import');
       }
+
+      // skip if inside a module
+      if (node.type == 'TSModuleDeclaration'){
+        return;
+      }
     }
 
     return {

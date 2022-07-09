@@ -197,6 +197,20 @@ ruleTester.run('newline-after-import', require('rules/newline-after-import'), {
       parser: parsers.BABEL_OLD,
     },
     {
+      code: `
+        import { foo } from 'bar'
+
+        declare module '*.foo' {
+          import { type Foo } from 'bar'
+          
+          const content: Foo<{}>
+          export default content
+      }
+      `,
+      parserOptions: { ecmaVersion: 2015, sourceType: 'module' } ,
+      parser: parsers.BABEL_OLD,
+    },
+    {
       code: `var foo = require('foo');\n\n@SomeDecorator(foo)\nclass Foo {}`,
       parserOptions: { ecmaVersion: 2015, sourceType: 'module' },
       parser: parsers.BABEL_OLD,
